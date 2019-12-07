@@ -5,16 +5,21 @@ const settings={
     }
 };
 
-const settings={
+const settings1={
     method:"POST",
     headers:{
-        "Content-Type":"application/json"
+        "Content-Type":"application/pdf"
     }
 };
-fetch("/students",settings).then(res => res.json()).then(res => {
-    document.getElementById("students").innerText=res.map(s => s.Name).reduce((s1, s2) => s1 + " Booty " + s2);
-});
 
+document.getElementById("form").addEventListener("submit", e => {
+    const files = document.querySelector('[type=file]').files
+  const formData = new FormData();
+
+  formData.append("data", files[0]);
+  settings1.body = formData;
+    fetch("/api/bitch",settings1).then(res => console.log(res));
+})
 
 
 

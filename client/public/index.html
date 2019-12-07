@@ -18,7 +18,10 @@
     <div id="root" style="display: none;"></div>
     <div id="students"></div>
     <!-- AMBERS CODE GOES HERE -->
-    <input type="file" id="spreadSheet"/>
+    <form method="post" enctype="application/x-www-form-urlencoded" id="form" action="/api/bitch">
+      <input type="file" name="file" />
+      <input type="submit" value="Upload File" name="submit" id="submit"/>
+    </form>
   </body>
 
   <script type="text/javascript" src="sample.js"></script>

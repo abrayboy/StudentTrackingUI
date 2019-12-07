@@ -5,13 +5,18 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 19500;
 
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var uploadRouter = require('./routes/upload');
 
 app.use(express.static(path.join(__dirname, 'build')))
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api', uploadRouter);
 
 
 
