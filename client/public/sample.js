@@ -18,7 +18,7 @@ document.getElementById("form").addEventListener("submit", e => {
 
   formData.append("data", files[0]);
   settings1.body = formData;
-    fetch("/api/bitch",settings1).then(res => console.log(res));
+    fetch("/api/upload",settings1).then(res => console.log(res));
 })
 
 
