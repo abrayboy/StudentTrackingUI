@@ -1,5 +1,6 @@
 const fs = require('fs');
-const students = require('./../dto/StudentDTO');
+const readline = require('readline');
+const StudentDTO = require('./../dto/StudentDTO');
 
 
 module.exports = {
@@ -19,6 +20,22 @@ module.exports = {
 
     FileReader: function() {
 
-        
+        this.readCsvHeaders = (_headers) => {
+            let headers =_headers.split(",");
+            return 1;
+        }
+
+        this.buildStudents = (file) => {
+            let students = [];     
+            let str = fs.readFileSync(file, "utf8");
+            for(let student of str.split('\r\n')) {
+                if (student != ",,,,,,,,,,,,,,,,,,,,,,,,") {
+                    let dto = new StudentDTO.StudentDTO(student.split(',')[0]);
+                    students.push(dto.getStudent());
+                }
+            }
+            console.log(students);
+            return students;
+        }
     }
 };
