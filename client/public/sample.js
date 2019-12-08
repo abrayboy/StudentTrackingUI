@@ -1,25 +1,20 @@
+(function() {
 const settings={
-    method:"GET",
-    headers:{
-        "Content-Type":"application/json"
-    }
-};
-
-const settings1={
     method:"POST",
     headers:{
-        "Content-Type":"application/pdf"
+        "Content-Type":"application/x-www-form-urlencoded"
     }
 };
 
-document.getElementById("form").addEventListener("submit", e => {
+document.getElementById("form").addEventListener("submit", async e => {
+    e.preventDefault();
     const files = document.querySelector('[type=file]').files
-  const formData = new FormData();
-
-  formData.append("data", files[0]);
-  settings1.body = formData;
-    fetch("/api/bitch",settings1).then(res => console.log(res));
-})
+    settings.body = files[0];
+    let ajax = await fetch("/api/upload",settings);
+    let data = await ajax.json();
+    console.info(data);
+});
+})();
 
 
 

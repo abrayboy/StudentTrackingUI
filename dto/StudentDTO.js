@@ -11,6 +11,10 @@ module.exports = {
                             resume, interview, award) {
 
         this.StudentId = _studentId;
+        this.FirstGen = firstGen;
+        this.Race = race;
+        this.Disability = disability;
+        this.NotifiedStudent = notifiedStudent;
 
         this.getStudentId = () => this.StudentId;
 

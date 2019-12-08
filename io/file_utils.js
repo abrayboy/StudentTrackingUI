@@ -1,7 +1,7 @@
 const fs = require('fs');
 const readline = require('readline');
 const StudentDTO = require('./../dto/StudentDTO');
-
+const constants = require('./../constants/Constants');
 
 module.exports = {
 
@@ -26,12 +26,17 @@ module.exports = {
         }
 
         this.buildStudents = (file) => {
+            'use strict';
             let students = [];     
             let str = fs.readFileSync(file, "utf8");
-            for(let student of str.split('\r\n')) {
-                if (student != ",,,,,,,,,,,,,,,,,,,,,,,,") {
-                    let dto = new StudentDTO.StudentDTO(student.split(',')[0]);
-                    students.push(dto.getStudent());
+            let Constants = constants.Constants;
+            let strSplit = str.split('\r\n');
+            for(let i = 1; i < strSplit.length -2; i++) {
+                if (strSplit[i] != ",,,,,,,,,,,,,,,,,,,,,,,,") {
+                    let fields = strSplit[i].split(',');
+                    let dto = new StudentDTO.StudentDTO(fields[Constants.StudentId], fields[Constants.CoachName]);
+                    console.info(dto);
+                    students.push(dto);
                 }
             }
             console.log(students);
