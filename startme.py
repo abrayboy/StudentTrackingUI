@@ -47,6 +47,9 @@ if __name__ == '__main__':
     job1.start()
     time.sleep(2)
     job2.start()
-
+    time.sleep(2)
+    job1.join()
+    time.sleep(2)
+    job2.join()
 
 

@@ -1,7 +1,7 @@
 
 module.exports = {
 
-    StudentDTO: function(_studentId, firstGen, race,
+    StudentDTO: function(_studentId, coachName, firstGen, race,
                             disability, classification, sevenTargetSchools,
                             notifiedStudent, scholarshipMatchingComplete,
                             scholarshipEssay, scholarshipDeadLines,
@@ -11,6 +11,7 @@ module.exports = {
                             resume, interview, award) {
 
         this.StudentId = _studentId;
+        this.CoachName = coachName;
         this.FirstGen = firstGen;
         this.Race = race;
         this.Disability = disability;

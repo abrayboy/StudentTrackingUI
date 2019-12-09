@@ -7,10 +7,10 @@ const FileUtils = require("./../io/file_utils");
 router.post('/upload', function (req, res) {
   let reader = new FileUtils.FileReader();
   console.log(req.body);
-  fs.writeFileSync("/tmp/student_data.csv", Object.keys(req.body)[0], err =>{ 
+  fs.writeFileSync("/tmp/students.csv", Object.keys(req.body)[0], err =>{ 
     if (err) throw err;
   });
-  let students = reader.buildStudents("/tmp/student_data.csv");
+  let students = reader.buildStudents("/tmp/students.csv");
   console.log(students.length);
   res.send(students);
 })

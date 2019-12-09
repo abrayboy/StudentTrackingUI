@@ -12,11 +12,13 @@ app.use(bodyParser.json())
 
 var indexRouter = require('./routes/index');
 var uploadRouter = require('./routes/upload');
+var addRouter = require('./routes/add');
 
 app.use(express.static(path.join(__dirname, 'build')))
 
 app.use('/', indexRouter);
 app.use('/api', uploadRouter);
+app.use('/api', addRouter);
 
 
 

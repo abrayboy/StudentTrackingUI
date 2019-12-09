@@ -31,13 +31,11 @@ module.exports = {
             let str = fs.readFileSync(file, "utf8");
             let Constants = constants.Constants;
             let strSplit = str.split('\r\n');
-            for(let i = 1; i < strSplit.length -2; i++) {
-                if (strSplit[i] != ",,,,,,,,,,,,,,,,,,,,,,,,") {
+            for(let i = 1; i < strSplit.length; i++) {
                     let fields = strSplit[i].split(',');
                     let dto = new StudentDTO.StudentDTO(fields[Constants.StudentId], fields[Constants.CoachName]);
                     console.info(dto);
                     students.push(dto);
-                }
             }
             console.log(students);
             return students;
