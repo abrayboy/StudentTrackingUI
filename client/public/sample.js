@@ -29,7 +29,33 @@ document.getElementById("butt").addEventListener("click", async e => {
     let ajax = await fetch("/api/add", config);
     let body = await ajax.json();
     console.info(body);
-})
+});
+
+document.getElementById("butt2").addEventListener("click", async e => {
+    let config = {
+    method:"GET",
+    headers:{
+        "Content-Type":"application/json"
+        }
+    };
+
+    let ajax = await fetch("/api/student/ASCCQ", config);
+    let body = await ajax.json();
+    console.info(body);
+});
+
+document.getElementById("butt3").addEventListener("click", async e => {
+    let config = {
+    method:"GET",
+    headers:{
+        "Content-Type":"application/json"
+        }
+    };
+
+    let ajax = await fetch("/api/students", config);
+    let body = await ajax.json();
+    console.info(body);
+});
 
 })();
 
