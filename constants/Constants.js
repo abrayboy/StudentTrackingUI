@@ -1,6 +1,5 @@
-module.exports = {
-
-    Costants: {
+exports.Constants =
+ {
         StudentId:0,
         CoachName:1,
         FirstGen:2,
@@ -26,5 +25,4 @@ module.exports = {
         Resume:22,
         Interview:23,
         Award:24
-    }
 };
