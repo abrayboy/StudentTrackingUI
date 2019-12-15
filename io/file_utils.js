@@ -35,10 +35,8 @@ module.exports = {
                                                 fields[Constants.CoachFinalReview], fields[Constants.LOR],
                                                 fields[Constants.Resume], fields[Constants.Interview],
                                                 fields[Constants.Award]);
-                    console.info(dto);
                     students.push(dto);
             }
-            console.log(students);
             return students;
         }
     }

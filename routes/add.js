@@ -1,19 +1,20 @@
 var express = require('express');
 var router = express.Router();
-var fs = require('fs');
+var store = require('./../store/StudentStore');
+var logging = require('./../log/logger');
 
-/* POST Add new student */
+const Logger = new logging.Logger("AddController");
+
+/* POST Add student */
 router.post("/add", (req, res) => {
-    console.log(req.body)
-    let fields = Object.values(req.body);
-    let row = fields.reduce((f1, f2) => `${f1},${f2}`).toString();
-    console.debug(row)
-    let newRow = "\r\n" + row;
-    fs.appendFile("/tmp/students.csv", newRow, err => { 
-        if (err) console.error(err) 
-        else console.info(`New Row  in students.csv => ${newRow}`);
-    });
-    res.send({NewRow:newRow});
+    Logger.trace(" POST /api/add");
+    Logger.info(req.body.StudentId)
+    let student = req.body;
+    let StudentStore = new store.StudentStore();
+    StudentStore.Renew();
+    let success = StudentStore.Add(student);
+    Logger.trace(" POST end");
+    res.send({success});
 });
 
 module.exports = router;

@@ -10,7 +10,6 @@ def start_api_server():
 def start_client_server():
     os.system('cd client && npm start')
 
-
 def check_os():
     print('Checking Operating System...')
     jsonData = read_json()
@@ -33,7 +32,6 @@ def read_json():
             jsonData['scripts']['start'] = 'PORT=1641 && react-scripts start'
         print("Current OS: " + _os)
         time.sleep(1)
-        print(jsonData)
         jsonFile.close()
     return jsonData
 
