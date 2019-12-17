@@ -15,12 +15,13 @@ exports.StudentStore = function (studentManager, _store) {
     const Logger = new logging.Logger('StudentStore');
 
     const writeStudents = (filename, students, csvFileName) => {
-        fs.writeFile(filename, JSON.stringify(students), 
+        fs.writeFileSync(filename, JSON.stringify(students), 
         err => { if (err) throw err });
         let headers = csvFields.Fields;
+        console.log(headers);
         let jsonCsv = new Parser({ headers });
         let csv = jsonCsv.parse(students);
-        setTimeout(() => fs.writeFile(csvFileName, csv, err => { if (err) throw err}) , 5000  );
+        setTimeout(() => fs.writeFile(csvFileName, csv, err => { if (err) throw err}) , 3000  );
     };
 
     this.Add = (student) => {
@@ -46,6 +47,7 @@ exports.StudentStore = function (studentManager, _store) {
     this.Delete = (student) => {
         if (StudentManager.DeleteStudent(student) === true) {
             self.WriteToStore();
+            Logger.info(`Student Count: ${StudentManager.Students.length}`)
             Logger.info(`Delete Student:${student.StudentId}`);
             return true;
         }

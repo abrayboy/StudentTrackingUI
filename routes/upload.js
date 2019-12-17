@@ -13,16 +13,25 @@ const Logger = new logging.Logger("UploadController");
 router.post('/upload', function (req, res) {
   Logger.trace("POST /api/upload >>");
   let builder = new FileUtils.StudentBuilder();
-  let filename = path.join(__dirname, "./../students.csv");
-  Logger.debug(`CSV Filename:${filename}`);
-  fs.writeFileSync(filename, Object.keys(req.body)[0], err =>{ 
-    if (err) throw err;
-  });
-  let students = builder.Build(filename);
-  let manager = new dto.StudentManager(students);
-  let myStore = new Store.StudentStore(manager, path.join(__dirname, './../cache/store.json'));
-  myStore.WriteToStore();
-  Logger.trace("POST /api/upload <<");
-  res.send(students);
+  builder
+    .Build(Object.keys(req.body)[0])
+    .then(json => {
+      let studentFields = json.map(obj => Object.values(obj));
+      let manager = new dto.StudentManager();
+      studentFields.forEach(field => {
+        field.unshift(null);
+        let student = new (Function.prototype.bind.apply(dto.Student, field));
+        manager.AddStudent(student);
+      });
+      let myStore = new Store.StudentStore(manager, path.join(__dirname, './../cache/store.json'));
+      myStore.WriteToStore();
+      res.send(manager.Students);
+      Logger.trace("POST /api/upload <<");
+    })
+  // let manager = new dto.StudentManager(students);
+  // let myStore = new Store.StudentStore(manager, path.join(__dirname, './../cache/store.json'));
+  // myStore.WriteToStore();
+  // console.log(students);
+  
 });
 module.exports = router;
