@@ -10,10 +10,11 @@ const dto = require('./../dto/StudentDTO');
 router.post('/upload', function (req, res) {
   let builder = new FileUtils.StudentBuilder();
   console.log(path.join(__dirname));
-  fs.writeFileSync("/tmp/students.csv", Object.keys(req.body)[0], err =>{ 
+  let filename = path.join(__dirname, "./../students.csv");
+  fs.writeFileSync(filename, Object.keys(req.body)[0], err =>{ 
     if (err) throw err;
   });
-  let students = builder.Build("/tmp/students.csv");
+  let students = builder.Build(filename);
   let manager = new dto.StudentManager(students);
   let myStore = new Store.StudentStore(manager, path.join(__dirname, './../cache/store.json'));
   myStore.WriteToStore();

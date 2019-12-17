@@ -9,7 +9,7 @@ module.exports = {
 
         this.errors = [];
         this.WriteStudents = (filename, students) => {
-            fs.appendFile(filename, JSON.stringify(students), 
+            fs.writeFile(filename, JSON.stringify(students), 
             err => { if (err) console.error(err)});
         }
     },

@@ -4,7 +4,11 @@ const store = require('./../cache/store.json');
 
 /* GET All students in store. */
 router.get("/students", (req, res, next) => {
-    res.send(store);
+    if (!req.headers.authorization) {
+        res.status(401).json({Message:"Unauthorized"});
+        res.send("Nah");
+    }
+    else res.send(store);
 });
 
 module.exports = router;
