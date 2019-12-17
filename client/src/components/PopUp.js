@@ -1,43 +1,47 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AddStudentForm from './AddStudentForm';
+import StudentForm from './StudentForm';
 import swal from 'sweetalert';
-import dto from './../dto/StudentDTO';
+import dto from './../client-dto/StudentDTO';
 
 export default class PopUp {
 
-    async show() {
+    async show(_student) {
 
         let container = document.createElement("div");
-        ReactDOM.render(<AddStudentForm />, container);
+        if (!!_student) ReactDOM.render(<StudentForm Student={_student} />, container);
+        else ReactDOM.render(<StudentForm />, container);
         let el = container.firstChild;
 
         let popUp = await swal({
-            title: "New Student",
+            title: !!_student ? "Edit Student" : "New Student",
             content: el,
             className: "swal-show",
             buttons: true
         });
         if (await popUp) {
             let attributeElements = document.getElementsByClassName("studentAttribute");
+            //console.log(attributeElements)
             let attributes = [...attributeElements]
-                                .map(input => input.value);
-            console.log(attributes);
+                .map(input => input.value);
             attributes.unshift(null);
+            console.log(attributes);
             let student = new (Function.prototype.bind.apply(dto.Student, attributes));
+            console.log(student);
             let config = {
-                method: "POST",
+                method: !!_student ? "PUT" : "POST",
                 body: JSON.stringify(student),
                 headers: {
-                    "Content-Type":"application/json",
-                    "Authorization":"admin"
+                    "Content-Type": "application/json",
+                    "Authorization": "admin"
                 }
             }
-            let ajax = await fetch('/api/add', config);
+            let url = !!_student ? '/api/edit' : '/api/add';
+            let ajax = await fetch(url, config);
             let body = await ajax.json();
-            console.log(body);
-            console.log(student);
+            return body;
         }
+        return false;
     }
 
 }

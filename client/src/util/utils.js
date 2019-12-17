@@ -14,10 +14,12 @@ exports.TextToBool = (text) => {
                 return text;
         }
     }
+    return "N/A";
 }
 
 exports.TextToCurrency = (text) => {
-    if (!text) return text;
-    let currencyStr = text.replace(/\"/g, "").replace(/\$/g, "");
+    if (text == 0) return text;
+    else if (!!text) return "N/A";
+    let currencyStr = text.replace(/"/g, "").replace(/\$/g, "");
     return !!currencyStr ? parseFloat(currencyStr.trim()) : 0;
 }

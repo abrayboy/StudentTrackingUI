@@ -1,11 +1,12 @@
 const utils = require('./../util/utils');
+const logging = require('./../log/logger');
 module.exports = {
 
     Student: function (_studentId, coachName, firstGen, race,
         disability, classification, sevenTargetSchools,
         notifiedStudent, scholarshipMatchingComplete,
         scholarshipEssay, scholarshipDeadLines,
-        scholarshipEssay3, reviewOfEssay, completedFafsa,
+        scholarshipEssay3, reviewOfEssay, collegeApplicationDeadlines, completedFafsa,
         admissionDeadlines, rejected, waitlisted,
         accepted, collegePacketComplete, coachFinalReview,
         lor, resume, interview, award) {
@@ -23,6 +24,7 @@ module.exports = {
         this.ScholarshipDeadlines = scholarshipDeadLines;
         this.ScholarshipEssay3 = scholarshipEssay3;
         this.ReviewOfEssay = reviewOfEssay;
+        this.CollegeApplicationDeadlines = collegeApplicationDeadlines;
         this.CompletedFafsa = utils.TextToBool(completedFafsa);
         this.AdmissonDealines = admissionDeadlines;
         this.Rejected = utils.TextToBool(rejected);
@@ -39,6 +41,7 @@ module.exports = {
     StudentManager: function (_students) {
 
         const self = this;
+        const Logger = new logging.Logger("StudentManager");
         this.Students =  _students || [];
 
         this.SetStudents = (students) => {
@@ -53,7 +56,7 @@ module.exports = {
                 self.Students.push(student)
                 return true;
             }
-            return { Message: `Duplicate entry for student: ${student.StudentId}` }
+            return false;
         };
 
         this.IndexOf = (student) => {
@@ -71,7 +74,9 @@ module.exports = {
         this.UpdateStudent = (student) => {
             let index = self.IndexOf(student);
             if (index !== -1) {
+                let pre = self.Students[index];
                 self.Students[index] = student;
+                Logger.info(`Updated? :${pre.Disability !== self.Students[index].Disability}`);
                 return true;
             } 
             return false;
@@ -80,7 +85,7 @@ module.exports = {
         this.DeleteStudent = (student) => {
             let index = self.IndexOf(student);
             if (index !== -1) {
-                self.SetStudents(self.Students.splice(index, 1));
+                self.Students.splice(index, 1);
                 return true;
             }
             return false;

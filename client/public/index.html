@@ -1,32 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>STUDENT TRACKING</title>
-    <script type="text/javascript" src="scripts/sweetalert.min.js"></script>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root" style="display: none;"></div>
-    <div id="students"></div>
-    <!-- AMBERS CODE GOES HERE -->
-    <form id="form">
-      <input type="file" name="file" />
-      <input type="submit" value="Upload File" name="submit" id="submit"/>
-    </form>
-    <button id="butt" type="button">Add</button>
-    <button id="butt2" type="button">Get</button>
-    <button id="butt3" type="button">Students</button>
-    <button id="butt4" type="button">Pop Up</button>
-    <script type="text/javascript" src="sample.js"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="%PUBLIC_URL%/css/main.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <title>STUDENT TRACKING</title>
+</head>
+
+<body id="body">
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root" style="display: none;"></div>
+  <div id="students"></div>
+  <!-- AMBERS CODE GOES HERE -->
+  <div id="header">
+    <img src="Pictures/SVG/main_logo.svg" id="logo"/>
+
+    <div id="settings-container" class="options-button">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+<div id="side-panel">
+  <h2>My Students</h2>
+  <div id="student-list"></div>
+  <button type="button" id="add-student-button">Add Student</button>
+</div>
+
+<div id="detailSection"></div>
+</div>
+</body>
+
+<script type="text/javascript" src="sample.js"></script>
+
 </html>
